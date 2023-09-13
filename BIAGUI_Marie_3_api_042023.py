@@ -19,7 +19,7 @@ import pickle as cPickle
 import gzip 
 embed = hub.load("https://tfhub.dev/google/universal-sentence-encoder/4")
 
-# Chargement du modele
+#  Chargement du modele
 # with open("usemodel.pkl", "rb") as f:
 #     model = pickle.load(f)
 
