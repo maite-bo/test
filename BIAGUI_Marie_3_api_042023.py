@@ -10,6 +10,7 @@ import pickle
 # from nltk.tokenize import  word_tokenizen 
 from bs4 import BeautifulSoup
 import lxml
+import os
 import html5lib
 import tensorflow_hub as hub
 import pandas as pd
@@ -109,7 +110,7 @@ def lower_start_fct(list_words) :
     return lw
 
 if __name__ == "__main__":
-    app.run(debug=True,host='0.0.0.0')
+    app.run(debug=True,host='0.0.0.0',port=os.environ.get("PORT", 5000))
 
     # une fois les tests realise, enregistrer le modele bagofwords en utilisant pickle, et le charger ici et l'utiliser pour predire les tags
 
