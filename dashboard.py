@@ -3,7 +3,8 @@ import os
 import requests
 import json
  
-api_endpoint = 'https://stack-overflow-tags-22dfc26dd07b.herokuapp.com/'
+# api_endpoint = 'https://stack-overflow-tags-22dfc26dd07b.herokuapp.com/'
+api_endpoint = 'http://127.0.0.1:5000/tag_prediction'
 
 def dashboard():
     st.title('Welcome to the Stack overflow tag prediction api')
@@ -14,6 +15,7 @@ def dashboard():
         data = {"question":question}
 
         response = requests.post(api_endpoint, json = data).json()
+        print(response)
         result = response['tags']
         if result is not None:
             st.success('tags have been predicted')
