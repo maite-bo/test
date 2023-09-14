@@ -52,7 +52,7 @@ embed = hub.load("https://tfhub.dev/google/universal-sentence-encoder/4")
 #     cPickle.dump(model, f, protocol=-1)
 
 with gzip.open("use_model", "rb") as f:
-    model = pickle.load(f)
+    model = cPickle.load(f)
 
 
 app = Flask(__name__)
@@ -110,7 +110,7 @@ def lower_start_fct(list_words) :
     return lw
 
 if __name__ == "__main__":
-    app.run(debug=True,host='0.0.0.0',port=os.environ.get("PORT", 5000))
+    app.run(debug=True,host='127.0.0.1',port=os.environ.get("PORT", 5000))
     # app.run(debug=True)
 
     # une fois les tests realise, enregistrer le modele bagofwords en utilisant pickle, et le charger ici et l'utiliser pour predire les tags
