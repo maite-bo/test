@@ -3,7 +3,7 @@ import os
 import requests
 import json
  
-api_endpoint = 'http://127.0.0.1:5000'
+api_endpoint = 'https://stack-overflow-tags-22dfc26dd07b.herokuapp.com/'
 
 def dashboard():
     st.title('Welcome to the Stack overflow tag prediction api')
