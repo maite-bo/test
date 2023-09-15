@@ -53,7 +53,6 @@ Flask==2.3.2
 # graphviz==0.20.1
 # grpcio==1.54.2
 gunicorn==21.2.0
-# gzip
 # h11==0.14.0
 # h5py==3.8.0
 html5lib==1.1
@@ -115,7 +114,6 @@ pandas==2.0.2
 # parso==0.8.3
 # pbr==3.1.1
 # pexpect==4.8.0
-pickle
 # pickleshare==0.7.5
 # Pillow==9.5.0
 # pkginfo==1.9.6
