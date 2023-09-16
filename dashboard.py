@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import json
+import logging
 
 # Configurez le logger pour Streamlit
 st_logger = st._logger
