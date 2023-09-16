@@ -76,6 +76,7 @@ with gzip.open("use_model", "rb") as f:
 
 app = Flask(__name__)
 
+# @app.route("/tag_prediction", methods=["POST"])
 @app.route("/tag_prediction", methods=["POST"])
 def predict_tag():
     try: 
@@ -136,7 +137,7 @@ def lower_start_fct(list_words) :
     return lw
 
 if __name__ == "__main__":
-    app.run(debug=True,host='0.0.0.0',port=os.environ.get("PORT", 5000))
+    app.run(debug=True,host='0.0.0.0',port=os.environ.get("PORT", 8000))
     # app.run(debug=True)
 
     # une fois les tests realise, enregistrer le modele bagofwords en utilisant pickle, et le charger ici et l'utiliser pour predire les tags
