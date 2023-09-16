@@ -4,8 +4,13 @@ import json
 import logging
 
 # Configurez le logger pour Streamlit
-st_logger = st._logger
-st_logger.setLevel(logging.DEBUG) 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)  # Configurez le niveau de journalisation, par exemple DEBUG
+
+# Créez un gestionnaire de journalisation pour enregistrer les journaux dans la console Streamlit
+streamlit_handler = logging.StreamHandler()
+streamlit_handler.setLevel(logging.DEBUG)  # Configurez le niveau de journalisation pour Streamlit
+logger.addHandler(streamlit_handler)
 
 
 # URL de l'API locale
