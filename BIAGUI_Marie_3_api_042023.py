@@ -78,24 +78,30 @@ app = Flask(__name__)
 
 @app.route("/tag_prediction", methods=["POST"])
 def predict_tag():
+    try: 
     # Recuperer les donnees de la requete
-    data = request.get_json()
-    question = data["question"]
+        data = request.get_json()
+        question = data["question"]
 
-    preprocessed_question = preprocess(question)
-    embeded_question = embed([preprocessed_question])
-    predicted_tags = model.predict([embeded_question])
-    # Conversion des tags en liste
-    predicted_tags_list = predicted_tags.tolist()
+        preprocessed_question = preprocess(question)
+        embeded_question = embed([preprocessed_question])
+        predicted_tags = model.predict([embeded_question])
+        # Conversion des tags en liste
+        predicted_tags_list = predicted_tags.tolist()
 
-    # Appliquer le seuil de 0.5 pour obtenir des valeurs de 0 ou 1
-    df_thresholded = predicted_tags >= 0.5
-    targets = pd.read_csv('targets.csv')
-    
-    target_names = list(targets['target'])
-    result = pd.DataFrame(df_thresholded, columns=target_names).T
-    prediction = list(result[result[0] == True].index)
-    return jsonify({"tags": prediction})
+        # Appliquer le seuil de 0.5 pour obtenir des valeurs de 0 ou 1
+        df_thresholded = predicted_tags >= 0.5
+        targets = pd.read_csv('targets.csv')
+        
+        target_names = list(targets['target'])
+        result = pd.DataFrame(df_thresholded, columns=target_names).T
+        prediction = list(result[result[0] == True].index)
+        return jsonify({"tags": prediction})
+    except Exception as e:
+        # Enregistrez l'erreur dans le journal
+        logger.error(f"An error occurred: {str(e)}")
+        return jsonify({"error": "An error occurred"}), 500
+
 
 def preprocess(text):
     # Effectuer le pretraitement du texte (ex : suppression des stopwords, normalisation, etc.)
