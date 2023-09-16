@@ -71,7 +71,7 @@ import pandas as pd
 import streamlit as st
 
 text = st.text_input(label="Enter your question:")
-
+text = 'python'
 if text:
     res = requests.get("https://sof-test-1c6c58d57243.herokuapp.com/api/text=" + ''.join(text))
 
