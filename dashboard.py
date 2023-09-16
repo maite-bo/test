@@ -2,6 +2,11 @@ import streamlit as st
 import requests
 import json
 
+# Configurez le logger pour Streamlit
+st_logger = st._logger
+st_logger.setLevel(logging.DEBUG) 
+
+
 # URL de l'API locale
 # api_endpoint = 'http://127.0.0.1:5000/tag_prediction'
 api_endpoint = 'https://sof-test-1c6c58d57243.herokuapp.com/tag_prediction'
