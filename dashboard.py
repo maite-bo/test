@@ -29,7 +29,7 @@ def dashboard():
     if st.button('Submit'):
         # Préparation des données à envoyer à l'API
         data = {"question": question}
-
+        print(data)
         # Appel de l'API en utilisant la bibliothèque requests
         response = requests.post(api_endpoint, json=data)
 

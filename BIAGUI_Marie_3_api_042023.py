@@ -82,6 +82,7 @@ def predict_tag():
     # Recuperer les donnees de la requete
         data = request.get_json()
         question = data["question"]
+        print(question)
 
         preprocessed_question = preprocess(question)
         embeded_question = embed([preprocessed_question])
