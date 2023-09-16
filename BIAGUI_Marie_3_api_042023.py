@@ -3,6 +3,8 @@
 # -*- coding: utf-8 -*-
 # coding=utf-8
 
+
+import logging
 from flask import Flask, jsonify, request
 
 import pickle
@@ -18,6 +20,23 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 import pickle as cPickle
 import gzip 
 embed = hub.load("https://tfhub.dev/google/universal-sentence-encoder/4")
+
+
+
+# Créez un objet Logger
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)  # Configurez le niveau de journalisation, par exemple DEBUG
+
+# Configurez un gestionnaire de journalisation pour enregistrer les journaux dans un fichier
+file_handler = logging.FileHandler('app.log')
+file_handler.setLevel(logging.DEBUG)
+
+# Configurez un format de journalisation
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+file_handler.setFormatter(formatter)
+
+# Ajoutez le gestionnaire au logger
+logger.addHandler(file_handler)
 
 #  Chargement du modele
 # with open("usemodel.pkl", "rb") as f:
@@ -110,7 +129,7 @@ def lower_start_fct(list_words) :
     return lw
 
 if __name__ == "__main__":
-    app.run(debug=True,host='127.0.0.1',port=os.environ.get("PORT", 5000))
+    app.run(debug=True,host='0.0.0.0',port=os.environ.get("PORT", 5000))
     # app.run(debug=True)
 
     # une fois les tests realise, enregistrer le modele bagofwords en utilisant pickle, et le charger ici et l'utiliser pour predire les tags
