@@ -75,9 +75,9 @@ with gzip.open("use_model", "rb") as f:
 
 
 app = Flask(__name__)
-
+print(app)
 # @app.route("/tag_prediction", methods=["POST"])
-@app.route("/tag_prediction", methods=["POST"])
+@app.route("/", methods=["POST"])
 def predict_tag():
     try: 
     # Recuperer les donnees de la requete
