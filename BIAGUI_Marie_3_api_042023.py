@@ -69,8 +69,11 @@ def lemmatization(text, allowed_postags=["NOUN", "VERB", "ADJ", "ADV"]):
     top_10_tags = []
     with open("top_10_tags.txt", "r") as file:
         top_10_tags = [tag.strip() for tag in file]
-
-    nlp = spacy.load("en_core_web_sm", disable=["parser", "ner"])
+    try:
+        nlp = spacy.load("en_core_web_sm", disable=["parser", "ner"])
+    except:
+        spacy.cli.download("en_core_web_sm")
+        nlp = spacy.load("en_core_web_sm", disable=["parser", "ner"])
     doc = nlp(text)
     new_text = []
     for token in doc:
