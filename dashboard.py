@@ -51,9 +51,9 @@ def dashboard():
         else:
             st.error('Error: Unable to connect to the prediction API.')
 
-# if __name__ == '__main__':
-#     # Appel de la fonction principale pour lancer l'application Streamlit
-#     dashboard()
+if __name__ == '__main__':
+    # Appel de la fonction principale pour lancer l'application Streamlit
+    dashboard()
 
 #         response = requests.post(api_endpoint, json = data).json()
 #         result = response['tags']
