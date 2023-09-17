@@ -6,7 +6,8 @@
 
 import logging
 from flask import Flask, jsonify, request
-
+import spacy
+import numpy as np
 import pickle
 import nltk
 from joblib import load
