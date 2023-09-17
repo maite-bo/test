@@ -72,13 +72,15 @@ def predict_tag():
     print('question' + question)
 
     preprocessed_question = preprocess(question)
+    print('je suis entrée 2')
     embeded_question = embed([preprocessed_question])
     with gzip.open("use_model", "rb") as f:
         model = cPickle.load(f)
+    print('je suis entrée 3')
     predicted_tags = model.predict([embeded_question])
     # Conversion des tags en liste
     predicted_tags_list = predicted_tags.tolist()
-
+    print('je suis entrée 4')
     # Appliquer le seuil de 0.5 pour obtenir des valeurs de 0 ou 1
     df_thresholded = predicted_tags >= 0.5
     targets = pd.read_csv('targets.csv')
