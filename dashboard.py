@@ -4,7 +4,7 @@ import requests
 import json
 
 # URL de l'API locale
-api_endpoint = 'https://git.heroku.com/sof-test.git/tag_prediction'
+api_endpoint = 'https://git.heroku.com/sof-test.git/tag_prediction' 
 
 # Fonction principale de l'application Streamlit
 def dashboard():

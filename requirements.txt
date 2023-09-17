@@ -173,7 +173,7 @@ scikit-learn==1.2.2
 # soupsieve==2.4.1
 # stack-data==0.6.0
 # starlette==0.27.0
-streamlit==1.24.0
+streamlit==1.24.0 
 # tenacity==8.2.2
 # tensorboard==2.12.3
 # tensorboard-data-server==0.7.1
