@@ -70,15 +70,13 @@ logger.addHandler(file_handler)
 # with gzip.open('usemodel','wb') as f:
 #     cPickle.dump(model, f, protocol=-1)
 
-with gzip.open("use_model", "rb") as f:
-    model = cPickle.load(f)
+
 
 
 app = Flask(__name__)
-print(app)
-# @app.route("/tag_prediction", methods=["POST"])
+@app.route("/tag_prediction", methods=["POST"])
 # @app.route("/", methods=["POST"])
-@app.route("/api/text=<text>")
+# @app.route("/api/text=<text>")
 def predict_tag():
     try: 
     # Recuperer les donnees de la requete
@@ -89,6 +87,8 @@ def predict_tag():
 
         preprocessed_question = preprocess(question)
         embeded_question = embed([preprocessed_question])
+        with gzip.open("use_model", "rb") as f:
+            model = cPickle.load(f)
         predicted_tags = model.predict([embeded_question])
         # Conversion des tags en liste
         predicted_tags_list = predicted_tags.tolist()
