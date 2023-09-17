@@ -9,13 +9,14 @@ from flask import Flask, jsonify, request
 
 import pickle
 import nltk
+from joblib import load
 
 # from nltk.tokenize import  word_tokenizen 
 from bs4 import BeautifulSoup
 import lxml
 import os
 import html5lib
-import tensorflow_hub as hub
+# import tensorflow_hub as hub
 import pandas as pd
 from nltk.tokenize import sent_tokenize, word_tokenize
 import pickle as cPickle
@@ -64,7 +65,7 @@ import gzip
 app = Flask(__name__)
 @app.route("/tag_prediction", methods=["POST"])
 def predict_tag():
-    embed = hub.load("https://tfhub.dev/google/universal-sentence-encoder/4")
+    # embed = hub.load("https://tfhub.dev/google/universal-sentence-encoder/4")
 # Recuperer les donnees de la requete
     print('je suis entrée')
     data = request.get_json()
@@ -73,11 +74,13 @@ def predict_tag():
 
     preprocessed_question = preprocess(question)
     print('je suis entrée 2')
-    embeded_question = embed([preprocessed_question])
-    with gzip.open("use_model", "rb") as f:
-        model = cPickle.load(f)
+    # embeded_question = embed([preprocessed_question])
+    # with gzip.open("use_model", "rb") as f:
+    #     model = cPickle.load(f)
+    model = load('trained_bow_logreg.joblib')
     print('je suis entrée 3')
-    predicted_tags = model.predict([embeded_question])
+    predicted_tags = model.predict(preprocessed_question)
+    print(predicted_tags)
     # Conversion des tags en liste
     predicted_tags_list = predicted_tags.tolist()
     print('je suis entrée 4')
@@ -91,6 +94,7 @@ def predict_tag():
     prediction = list(result[result[0] == True].index)
     print('je suis entrée 7')
     print(prediction)
+    print()
     return jsonify({"tags": prediction})
 
 

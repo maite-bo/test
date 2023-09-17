@@ -67,13 +67,13 @@ html5lib==1.1
 # ipykernel==6.17.0
 # ipython==8.6.0
 # ipython-genutils==0.2.0
-# itsdangerous==2.1.2
+itsdangerous==2.1.2
 # jaraco.classes==3.2.3
 # jax==0.4.12
 # jedi==0.18.1
 # Jinja2==3.1.2
 # joblib==1.2.0
-# jsonschema==4.17.3
+jsonschema==4.17.3
 # jupyter_client==7.4.4
 # jupyter_core==4.11.2
 # keras==2.12.0
@@ -177,9 +177,9 @@ scikit-learn==1.2.2
 # tenacity==8.2.2
 # tensorboard==2.12.3
 # tensorboard-data-server==0.7.1
-tensorflow-cpu ==2.12.0
+# tensorflow-cpu ==2.12.0
 # tensorflow-estimator==2.12.0
-tensorflow-hub==0.13.0
+# tensorflow-hub==0.13.0
 # tensorflow-io-gcs-filesystem==0.32.0
 # tensorflow-text==2.12.1
 # termcolor==2.3.0
