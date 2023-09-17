@@ -1,23 +1,10 @@
 import streamlit as st
+import os
 import requests
 import json
-import logging
-
-# Configurez le logger pour Streamlit
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)  # Configurez le niveau de journalisation, par exemple DEBUG
-
-# Créez un gestionnaire de journalisation pour enregistrer les journaux dans la console Streamlit
-streamlit_handler = logging.StreamHandler()
-streamlit_handler.setLevel(logging.DEBUG)  # Configurez le niveau de journalisation pour Streamlit
-logger.addHandler(streamlit_handler)
-
 
 # URL de l'API locale
-# api_endpoint = 'http://127.0.0.1:8000/tag_prediction'
-api_endpoint = 'https://sof-test-1c6c58d57243.herokuapp.com/tag_prediction'
- 
-# api_endpoint = 'https://sof-test-1c6c58d57243.herokuapp.com'
+api_endpoint = 'http://127.0.0.1:5000/tag_prediction'
 
 # Fonction principale de l'application Streamlit
 def dashboard():
@@ -26,13 +13,12 @@ def dashboard():
     
     # Champ de saisie pour la question
     question = st.text_input("Enter your question here")
-    question='python'
 
     # Bouton pour soumettre la question
     if st.button('Submit'):
         # Préparation des données à envoyer à l'API
         data = {"question": question}
-        print('tets ' ,  data)
+
         # Appel de l'API en utilisant la bibliothèque requests
         response = requests.post(api_endpoint, json=data)
 
@@ -55,6 +41,14 @@ if __name__ == '__main__':
     # Appel de la fonction principale pour lancer l'application Streamlit
     dashboard()
 
+#         response = requests.post(api_endpoint, json = data).json()
+#         result = response['tags']
+#         if result is not None:
+#             st.success('tags have been predicted')
+#             st.markdown(', '.join(result))
+
+# if __name__ == '__main__':
+#     dashboard()
 
 
 
