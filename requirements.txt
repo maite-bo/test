@@ -105,7 +105,7 @@ lxml==4.9.2
 # nest-asyncio==1.5.6
 nltk==3.8.1
 # numexpr==2.8.4
-numpy==1.25.0
+numpy==1.23.0
 # oauthlib==3.2.2
 # opencv-python==4.8.0.76
 # opt-einsum==3.3.0
