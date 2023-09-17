@@ -55,13 +55,6 @@ if __name__ == '__main__':
     # Appel de la fonction principale pour lancer l'application Streamlit
     dashboard()
 
-#         response = requests.post(api_endpoint, json = data).json()
-#         result = response['tags']
-#         if result is not None:
-#             st.success('tags have been predicted')
-#             st.markdown(', '.join(result))
 
-# if __name__ == '__main__':
-#     dashboard()
 
 

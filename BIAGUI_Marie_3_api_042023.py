@@ -19,24 +19,8 @@ import pandas as pd
 from nltk.tokenize import sent_tokenize, word_tokenize
 import pickle as cPickle
 import gzip 
-embed = hub.load("https://tfhub.dev/google/universal-sentence-encoder/4")
 
 
-
-# Créez un objet Logger
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)  # Configurez le niveau de journalisation, par exemple DEBUG
-
-# Configurez un gestionnaire de journalisation pour enregistrer les journaux dans un fichier
-file_handler = logging.FileHandler('app.log')
-file_handler.setLevel(logging.DEBUG)
-
-# Configurez un format de journalisation
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-file_handler.setFormatter(formatter)
-
-# Ajoutez le gestionnaire au logger
-logger.addHandler(file_handler)
 
 #  Chargement du modele
 # with open("usemodel.pkl", "rb") as f:
@@ -75,36 +59,31 @@ logger.addHandler(file_handler)
 
 app = Flask(__name__)
 @app.route("/tag_prediction", methods=["POST"])
-# @app.route("/", methods=["POST"])
-# @app.route("/api/text=<text>")
 def predict_tag():
-    try: 
-    # Recuperer les donnees de la requete
-        print('je suis entrée')
-        data = request.get_json()
-        question = data["question"]
-        print('question' + question)
+    embed = hub.load("https://tfhub.dev/google/universal-sentence-encoder/4")
+# Recuperer les donnees de la requete
+    print('je suis entrée')
+    data = request.get_json()
+    question = data["question"]
+    print('question' + question)
 
-        preprocessed_question = preprocess(question)
-        embeded_question = embed([preprocessed_question])
-        with gzip.open("use_model", "rb") as f:
-            model = cPickle.load(f)
-        predicted_tags = model.predict([embeded_question])
-        # Conversion des tags en liste
-        predicted_tags_list = predicted_tags.tolist()
+    preprocessed_question = preprocess(question)
+    embeded_question = embed([preprocessed_question])
+    with gzip.open("use_model", "rb") as f:
+        model = cPickle.load(f)
+    predicted_tags = model.predict([embeded_question])
+    # Conversion des tags en liste
+    predicted_tags_list = predicted_tags.tolist()
 
-        # Appliquer le seuil de 0.5 pour obtenir des valeurs de 0 ou 1
-        df_thresholded = predicted_tags >= 0.5
-        targets = pd.read_csv('targets.csv')
-        
-        target_names = list(targets['target'])
-        result = pd.DataFrame(df_thresholded, columns=target_names).T
-        prediction = list(result[result[0] == True].index)
-        return jsonify({"tags": prediction})
-    except Exception as e:
-        # Enregistrez l'erreur dans le journal
-        logger.error(f"An error occurred: {str(e)}")
-        return jsonify({"error": "An error occurred"}), 500
+    # Appliquer le seuil de 0.5 pour obtenir des valeurs de 0 ou 1
+    df_thresholded = predicted_tags >= 0.5
+    targets = pd.read_csv('targets.csv')
+    
+    target_names = list(targets['target'])
+    result = pd.DataFrame(df_thresholded, columns=target_names).T
+    prediction = list(result[result[0] == True].index)
+    return jsonify({"tags": prediction})
+
 
 
 def preprocess(text):
