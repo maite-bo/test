@@ -20,12 +20,9 @@ import pandas as pd
 from nltk.tokenize import sent_tokenize, word_tokenize
 import pickle as cPickle
 import gzip 
-# Stop words
-from nltk.corpus import stopwords
-nltk.download('averaged_perceptron_tagger')
-nltk.download('stopwords')
-nltk.download('punkt')
-nltk.download('wordnet')
+
+
+
 
 
 
