@@ -84,10 +84,13 @@ def predict_tag():
     # Appliquer le seuil de 0.5 pour obtenir des valeurs de 0 ou 1
     df_thresholded = predicted_tags >= 0.5
     targets = pd.read_csv('targets.csv')
-    
+    print('je suis entrée 5')
     target_names = list(targets['target'])
     result = pd.DataFrame(df_thresholded, columns=target_names).T
+    print('je suis entrée 6')
     prediction = list(result[result[0] == True].index)
+    print('je suis entrée 7')
+    print(prediction)
     return jsonify({"tags": prediction})
 
 
